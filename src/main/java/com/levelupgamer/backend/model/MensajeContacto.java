@@ -35,8 +35,8 @@ public class MensajeContacto {
     @Column(name = "message", nullable = false, columnDefinition = "Text")
     private String message;
 
-    @Column(name = "timeStramp", nullable = false)
-    private LocalDateTime timeStramp;
+    @Column(name = "timeStamp", nullable = false)
+    private LocalDateTime timeStamp;
 
     @Column(name = "status")
     private String status;
