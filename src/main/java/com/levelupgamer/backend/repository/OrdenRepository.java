@@ -12,6 +12,6 @@ public interface OrdenRepository extends JpaRepository<Orden, Long>{
 
     List<Orden> findByFechaCompraBetween(LocalDateTime starDateTime, LocalDateTime endDateTime);
 
-    @Query("SELECT o FROM Orden o WHERE Oo.totalPagar > :minTotal")
+    @Query("SELECT o FROM Orden o WHERE o.totalPagar > :minTotal")
     List<Orden> findByTotalGreaterThan(@Param("minTotal") Double minTotal);
 }
