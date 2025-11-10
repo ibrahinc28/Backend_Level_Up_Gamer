@@ -24,4 +24,18 @@ public class OrdenService {
         return ordenRepository.findAll();
     }
 
+    public Orden actualizaOrden(Long id, Orden detallesOrden){
+        return ordenRepository.findById(id).map(ordenExistente -> {
+            ordenExistente.setSubtotal(detallesOrden.getSubtotal());
+            ordenExistente.setItemsJson(detallesOrden.getItemsJson());
+            ordenExistente.setCostoEnvio(detallesOrden.getCostoEnvio());
+            ordenExistente.setTotalPagar(detallesOrden.getTotalPagar());
+            ordenExistente.setFechaCompra(detallesOrden.getFechaCompra());
+            return ordenRepository.save(ordenExistente);
+        }).orElse(null);
+    }
+
+    public void eliminarOrden(Long id){
+        ordenRepository.deleteById(id);
+    }
 }
