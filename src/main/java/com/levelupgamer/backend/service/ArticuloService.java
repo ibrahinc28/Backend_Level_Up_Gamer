@@ -30,24 +30,4 @@ public class ArticuloService {
     public List<Articulo> buscarPorTitulo(String keyword) {
         return articuloRepository.findByTitleContainingOrderByDateDesc(keyword);
     }
-    public Articulo guardarArticulo(Articulo articulo) {
-        return articuloRepository.save(articulo);
-    }
-
-    public Articulo actualizarArticulo(Long id, Articulo detallesArticulo){
-        return articuloRepository.findById(id).map(articuloExistente ->{
-            articuloExistente.setTitle(detallesArticulo.getTitle());
-            articuloExistente.setContent(detallesArticulo.getContent());
-            articuloExistente.setType(detallesArticulo.getType());
-            articuloExistente.setDate(detallesArticulo.getDate());
-            articuloExistente.setImageSrc(detallesArticulo.getImageSrc());
-            articuloExistente.setSummary(detallesArticulo.getSummary());
-
-            return articuloRepository.save(articuloExistente);
-        }).orElse(null);
-    }
-
-    public void eliminarArticulo(Long id){
-        articuloRepository.deleteById(id);
-    }
 }
