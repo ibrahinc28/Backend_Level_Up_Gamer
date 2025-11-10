@@ -25,7 +25,7 @@ public class MensajeContactoService {
 
     public List<MensajeContacto> obtenerMensajesNuevos(){
         final String STATUS_NUEVO = "Nuevo";
-        return mensajeContactoRepository.findByStatusOrderByTimestampDesc(STATUS_NUEVO);
+        return mensajeContactoRepository.findByStatusOrderByTimeStampDesc(STATUS_NUEVO);
 
     }
 

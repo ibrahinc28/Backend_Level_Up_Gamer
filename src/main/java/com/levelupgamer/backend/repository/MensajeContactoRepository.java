@@ -11,9 +11,9 @@ public interface MensajeContactoRepository extends JpaRepository <MensajeContact
 
     List<MensajeContacto> findByEmail(String email);
 
-    List<MensajeContacto> findByStatusOrderByTimestampDesc(String status);
+    List<MensajeContacto> findByStatusOrderByTimeStampDesc(String status);
 
-    List<MensajeContacto> findBySubjectContainingOrderByTimestampDesc(String keyword);
+    List<MensajeContacto> findBySubjectContainingOrderByTimeStampDesc(String keyword);
 
     @Query("SELECT COUNT(m) FROM MensajeContacto m WHERE m.status = 'Nuevo'")
     Long countNewMessages();
