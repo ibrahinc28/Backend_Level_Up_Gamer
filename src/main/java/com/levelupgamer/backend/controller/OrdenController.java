@@ -39,8 +39,8 @@ public class OrdenController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Orden> actualizarOrden(@PathVariable Long id, @RequestBody Orden orden) {
-        Orden actualizada = ordenService.actualizaOrden(id, orden);
+    public ResponseEntity<Orden> actualizarOrden(@PathVariable Long id, @RequestBody Orden ordenDetalles) {
+        Orden actualizada = ordenService.actualizaOrden(id, ordenDetalles);
         if (actualizada != null) {
             return ResponseEntity.ok(actualizada);
         }
