@@ -6,36 +6,36 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.levelupgamer.backend.model.Orden;
-import com.levelupgamer.backend.repository.OrdenRepository;
+import com.levelupgamer.backend.model.Carrito;
+import com.levelupgamer.backend.repository.CarritoRepository;
 
 @Service
-public class OrdenService {
+public class CarritoService {
 
     @Autowired
-    private OrdenRepository ordenRepository;
+    private CarritoRepository carritoRepository;
 
-    public Orden guardarOrden(Orden orden){
-        orden.setFechaCompra(LocalDateTime.now());
-        return ordenRepository.save(orden);
+    public Carrito guardarOrden(Carrito carrito){
+        carrito.setFechaCompra(LocalDateTime.now());
+        return carritoRepository.save(carrito);
     }
 
-    public List<Orden> obtenerTodas(){
-        return ordenRepository.findAll();
+    public List<Carrito> obtenerTodas(){
+        return carritoRepository.findAll();
     }
 
-    public Orden actualizaOrden(Long id, Orden detallesOrden){
-        return ordenRepository.findById(id).map(ordenExistente -> {
+    public Carrito actualizaOrden(Long id, Carrito detallesOrden){
+        return carritoRepository.findById(id).map(ordenExistente -> {
             ordenExistente.setSubtotal(detallesOrden.getSubtotal());
             ordenExistente.setItemsJson(detallesOrden.getItemsJson());
             ordenExistente.setCostoEnvio(detallesOrden.getCostoEnvio());
             ordenExistente.setTotalPagar(detallesOrden.getTotalPagar());
             ordenExistente.setFechaCompra(detallesOrden.getFechaCompra());
-            return ordenRepository.save(ordenExistente);
+            return carritoRepository.save(ordenExistente);
         }).orElse(null);
     }
 
     public void eliminarOrden(Long id){
-        ordenRepository.deleteById(id);
+        carritoRepository.deleteById(id);
     }
 }

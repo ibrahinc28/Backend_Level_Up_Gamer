@@ -8,8 +8,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.levelupgamer.backend.model.Orden;
-import com.levelupgamer.backend.service.OrdenService;
+import com.levelupgamer.backend.model.Carrito;
+import com.levelupgamer.backend.service.CarritoService;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,35 +21,35 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 
 @RestController
-@RequestMapping("/api/ordenes")
-public class OrdenController {
+@RequestMapping("/api/carrito")
+public class CarritoController {
 
     @Autowired
-    private OrdenService ordenService;
+    private CarritoService carritoService;
 
     @PostMapping()
-    public ResponseEntity<Orden> crearObtener(@RequestBody Orden orden) {
-        Orden nuevaOrden = ordenService.guardarOrden(orden);
+    public ResponseEntity<Carrito> crearObtener(@RequestBody Carrito carrito) {
+        Carrito nuevaOrden = carritoService.guardarOrden(carrito);
         return new ResponseEntity<>(nuevaOrden, HttpStatus.CREATED);
     }
     
     @GetMapping
-    public List<Orden> obtenerTodas() {
-        return ordenService.obtenerTodas();
+    public List<Carrito> obtenerTodas() {
+        return carritoService.obtenerTodas();
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Orden> actualizarOrden(@PathVariable Long id, @RequestBody Orden ordenDetalles) {
-        Orden actualizada = ordenService.actualizaOrden(id, ordenDetalles);
-        if (actualizada != null) {
-            return ResponseEntity.ok(actualizada);
+    public ResponseEntity<Carrito> actualizarOrden(@PathVariable Long id, @RequestBody Carrito ordenDetalles) {
+        Carrito actualizado = carritoService.actualizaOrden(id, ordenDetalles);
+        if (actualizado != null) {
+            return ResponseEntity.ok(actualizado);
         }
         return ResponseEntity.notFound().build();
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> eliminarOrden(@PathVariable Long id){
-        ordenService.eliminarOrden(id);
+        carritoService.eliminarOrden(id);
         return ResponseEntity.noContent().build();
     }
 }

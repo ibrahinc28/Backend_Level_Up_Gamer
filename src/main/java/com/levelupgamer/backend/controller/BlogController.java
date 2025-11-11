@@ -8,8 +8,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.levelupgamer.backend.model.Articulo;
-import com.levelupgamer.backend.service.ArticuloService;
+import com.levelupgamer.backend.model.Blog;
+import com.levelupgamer.backend.service.BlogService;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,43 +20,43 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PutMapping;
 
 @RestController
-@RequestMapping("/api/articulos")
-public class ArticuloController {
+@RequestMapping("/api/blog")
+public class BlogController {
 
     @Autowired
-    private ArticuloService articuloService;
+    private BlogService blogService;
 
     @GetMapping
-    public List<Articulo> getAllArticulos(@RequestParam(required = false) String type,
+    public List<Blog> getAllArticulos(@RequestParam(required = false) String type,
                                           @RequestParam(required = false) String keyword) {
         if (keyword != null && !keyword.isEmpty()){
-            return articuloService.buscarPorTitulo(keyword);
+            return blogService.buscarPorTitulo(keyword);
         }
 
         if(type != null && !type.isEmpty()) {
-            return articuloService.obtenerPorTipo(type);
+            return blogService.obtenerPorTipo(type);
         }
 
-        return articuloService.obtenerTodos();
+        return blogService.obtenerTodos();
         }
 
         @GetMapping("/{id}")
-        public ResponseEntity<Articulo> getArticuloById(@PathVariable Long id) {
-            return articuloService.obtenerPorId(id)
+        public ResponseEntity<Blog> getArticuloById(@PathVariable Long id) {
+            return blogService.obtenerPorId(id)
             .map(ResponseEntity::ok)
             .orElse(ResponseEntity.notFound().build());
 
         }
 
         @PostMapping
-        public ResponseEntity<Articulo> crearArticulo(@RequestBody Articulo articulo) {
-            Articulo nuevoArticulo = articuloService.guardarArticulo(articulo);
+        public ResponseEntity<Blog> crearArticulo(@RequestBody Blog blog) {
+            Blog nuevoArticulo = blogService.guardarArticulo(blog);
             return new ResponseEntity<>(nuevoArticulo,HttpStatus.CREATED);
         }
 
         @PutMapping("/{id}")
-        public ResponseEntity<Articulo> actualizarArticulo(@PathVariable Long id, @RequestBody Articulo articulo) {
-            Articulo actualizado = articuloService.actualizarArticulo(id, articulo);
+        public ResponseEntity<Blog> actualizarArticulo(@PathVariable Long id, @RequestBody Blog blog) {
+            Blog actualizado = blogService.actualizarArticulo(id, blog);
             if(actualizado != null){
                 return ResponseEntity.ok(actualizado);
             }
@@ -65,7 +65,7 @@ public class ArticuloController {
 
         @DeleteMapping("/{id}")
         public ResponseEntity<Void> eliminarArticulo(@PathVariable Long id){
-            articuloService.eliminarArticulo(id);
+            blogService.eliminarArticulo(id);
             return ResponseEntity.noContent().build();
         }
         
