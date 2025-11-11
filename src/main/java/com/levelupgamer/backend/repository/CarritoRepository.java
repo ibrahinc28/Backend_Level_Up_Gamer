@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 
 public interface CarritoRepository extends JpaRepository<Carrito, Long>{
 
-    List<Carrito> findByFechaCompraBetween(LocalDateTime starDateTime, LocalDateTime endDateTime);
+    List<Carrito> findByFechaCompraBetween(LocalDateTime startDateTime, LocalDateTime endDateTime);
 
     @Query("SELECT c FROM Carrito c WHERE c.totalPagar > :minTotal")
     List<Carrito> findByTotalGreaterThan(@Param("minTotal") Double minTotal);

@@ -28,9 +28,9 @@ public class CarritoController {
     private CarritoService carritoService;
 
     @PostMapping()
-    public ResponseEntity<Carrito> crearObtener(@RequestBody Carrito carrito) {
-        Carrito nuevaOrden = carritoService.guardarOrden(carrito);
-        return new ResponseEntity<>(nuevaOrden, HttpStatus.CREATED);
+    public ResponseEntity<Carrito> crearCarrito(@RequestBody Carrito carrito) {
+        Carrito nuevaCarrito = carritoService.guardarCarrito(carrito);
+        return new ResponseEntity<>(nuevaCarrito, HttpStatus.CREATED);
     }
     
     @GetMapping
@@ -39,8 +39,8 @@ public class CarritoController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Carrito> actualizarOrden(@PathVariable Long id, @RequestBody Carrito ordenDetalles) {
-        Carrito actualizado = carritoService.actualizaOrden(id, ordenDetalles);
+    public ResponseEntity<Carrito> actualizarCarrito(@PathVariable Long id, @RequestBody Carrito carritoDetalles) {
+        Carrito actualizado = carritoService.actualizaCarrito(id, carritoDetalles);
         if (actualizado != null) {
             return ResponseEntity.ok(actualizado);
         }
@@ -48,8 +48,8 @@ public class CarritoController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> eliminarOrden(@PathVariable Long id){
-        carritoService.eliminarOrden(id);
+    public ResponseEntity<Void> eliminarCarrito(@PathVariable Long id){
+        carritoService.eliminarCarrito(id);
         return ResponseEntity.noContent().build();
     }
 }

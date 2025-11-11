@@ -15,7 +15,7 @@ public class CarritoService {
     @Autowired
     private CarritoRepository carritoRepository;
 
-    public Carrito guardarOrden(Carrito carrito){
+    public Carrito guardarCarrito(Carrito carrito){
         carrito.setFechaCompra(LocalDateTime.now());
         return carritoRepository.save(carrito);
     }
@@ -24,18 +24,18 @@ public class CarritoService {
         return carritoRepository.findAll();
     }
 
-    public Carrito actualizaOrden(Long id, Carrito detallesOrden){
-        return carritoRepository.findById(id).map(ordenExistente -> {
-            ordenExistente.setSubtotal(detallesOrden.getSubtotal());
-            ordenExistente.setItemsJson(detallesOrden.getItemsJson());
-            ordenExistente.setCostoEnvio(detallesOrden.getCostoEnvio());
-            ordenExistente.setTotalPagar(detallesOrden.getTotalPagar());
-            ordenExistente.setFechaCompra(detallesOrden.getFechaCompra());
-            return carritoRepository.save(ordenExistente);
+    public Carrito actualizaCarrito(Long id, Carrito detallesCarrito){
+        return carritoRepository.findById(id).map(carritoExistente -> {
+            carritoExistente.setSubtotal(detallesCarrito.getSubtotal());
+            carritoExistente.setItemsJson(detallesCarrito.getItemsJson());
+            carritoExistente.setCostoEnvio(detallesCarrito.getCostoEnvio());
+            carritoExistente.setTotalPagar(detallesCarrito.getTotalPagar());
+            carritoExistente.setFechaCompra(detallesCarrito.getFechaCompra());
+            return carritoRepository.save(carritoExistente);
         }).orElse(null);
     }
 
-    public void eliminarOrden(Long id){
+    public void eliminarCarrito(Long id){
         carritoRepository.deleteById(id);
     }
 }

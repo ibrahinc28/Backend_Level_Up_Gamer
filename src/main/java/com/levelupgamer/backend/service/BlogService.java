@@ -32,25 +32,25 @@ public class BlogService {
         return blogRepository.findByTitleContainingOrderByDateDesc(keyword);
     }
 
-    public Blog guardarArticulo(Blog blog){
+    public Blog guardarBlog(Blog blog){
         return blogRepository.save(blog);
 
     }
 
-    public Blog actualizarArticulo(Long id, Blog detallesArticulo){
-        return blogRepository.findById(id).map(articuloExistente ->{
-            articuloExistente.setTitle(detallesArticulo.getTitle());
-            articuloExistente.setContent(detallesArticulo.getContent());
-            articuloExistente.setType(detallesArticulo.getType());
-            articuloExistente.setDate(detallesArticulo.getDate());
-            articuloExistente.setImageSrc(detallesArticulo.getImageSrc());
-            articuloExistente.setSummary(detallesArticulo.getSummary());
+    public Blog actualizarBlog(Long id, Blog detallesBlog){
+        return blogRepository.findById(id).map(blogExistente ->{
+            blogExistente.setTitle(detallesBlog.getTitle());
+            blogExistente.setContent(detallesBlog.getContent());
+            blogExistente.setType(detallesBlog.getType());
+            blogExistente.setDate(detallesBlog.getDate());
+            blogExistente.setImageSrc(detallesBlog.getImageSrc());
+            blogExistente.setSummary(detallesBlog.getSummary());
 
-            return blogRepository.save(articuloExistente);
+            return blogRepository.save(blogExistente);
         }).orElse(null);
     }
 
-    public void eliminarArticulo(Long id){
+    public void eliminarBlog(Long id){
         blogRepository.deleteById(id);
     }
 }

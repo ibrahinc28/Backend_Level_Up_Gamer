@@ -35,7 +35,7 @@ public class Blog {
     @Column(name = "summary", length = 255)
     private String summary;
 
-    @Column(name = "imageSrc")
+    @Column(name = "image_src")
     private String imageSrc;
 
     @Column(name = "content", columnDefinition = "TEXT")

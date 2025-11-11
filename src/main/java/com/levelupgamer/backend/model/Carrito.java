@@ -29,13 +29,13 @@ public class Carrito {
     @Column(name = "subtotal", nullable = false)
     private Double subtotal;
 
-    @Column(name = "costoEnvio", nullable = false)
+    @Column(name = "costo_envio", nullable = false)
     private Double costoEnvio;
 
-    @Column(name = "TotalPagar", nullable = false)
+    @Column(name = "total_pagar", nullable = false)
     private Double totalPagar;
 
-    @Column(name = "FechaCompra", nullable = false)
+    @Column(name = "fecha_compra", nullable = false)
     private LocalDateTime fechaCompra;
 
 }

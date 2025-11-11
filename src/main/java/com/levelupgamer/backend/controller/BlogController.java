@@ -27,7 +27,7 @@ public class BlogController {
     private BlogService blogService;
 
     @GetMapping
-    public List<Blog> getAllArticulos(@RequestParam(required = false) String type,
+    public List<Blog> getAllBlog(@RequestParam(required = false) String type,
                                           @RequestParam(required = false) String keyword) {
         if (keyword != null && !keyword.isEmpty()){
             return blogService.buscarPorTitulo(keyword);
@@ -41,7 +41,7 @@ public class BlogController {
         }
 
         @GetMapping("/{id}")
-        public ResponseEntity<Blog> getArticuloById(@PathVariable Long id) {
+        public ResponseEntity<Blog> getBlogById(@PathVariable Long id) {
             return blogService.obtenerPorId(id)
             .map(ResponseEntity::ok)
             .orElse(ResponseEntity.notFound().build());
@@ -49,14 +49,14 @@ public class BlogController {
         }
 
         @PostMapping
-        public ResponseEntity<Blog> crearArticulo(@RequestBody Blog blog) {
-            Blog nuevoArticulo = blogService.guardarArticulo(blog);
-            return new ResponseEntity<>(nuevoArticulo,HttpStatus.CREATED);
+        public ResponseEntity<Blog> crearBlog(@RequestBody Blog blog) {
+            Blog nuevoBlog = blogService.guardarBlog(blog);
+            return new ResponseEntity<>(nuevoBlog,HttpStatus.CREATED);
         }
 
         @PutMapping("/{id}")
-        public ResponseEntity<Blog> actualizarArticulo(@PathVariable Long id, @RequestBody Blog blog) {
-            Blog actualizado = blogService.actualizarArticulo(id, blog);
+        public ResponseEntity<Blog> actualizarBlog(@PathVariable Long id, @RequestBody Blog blog) {
+            Blog actualizado = blogService.actualizarBlog(id, blog);
             if(actualizado != null){
                 return ResponseEntity.ok(actualizado);
             }
@@ -64,8 +64,8 @@ public class BlogController {
         }
 
         @DeleteMapping("/{id}")
-        public ResponseEntity<Void> eliminarArticulo(@PathVariable Long id){
-            blogService.eliminarArticulo(id);
+        public ResponseEntity<Void> eliminarBlog(@PathVariable Long id){
+            blogService.eliminarBlog(id);
             return ResponseEntity.noContent().build();
         }
         
