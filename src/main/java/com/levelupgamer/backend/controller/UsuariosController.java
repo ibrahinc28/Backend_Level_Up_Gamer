@@ -7,9 +7,11 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import com.levelupgamer.backend.service.UsuariosService;
 import com.levelupgamer.backend.model.DatosUsuario;
@@ -26,6 +28,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("api/v1/usuarios")
+@CrossOrigin(origins = "http://localhost:5173") // para permitir el front de Vite
 public class UsuariosController {
     @Autowired
     private UsuariosService servicio;
@@ -83,6 +86,30 @@ public class UsuariosController {
         try {
             servicio.borrarUsuario(id);
             return ResponseEntity.noContent().build();
+        } catch (Exception e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    /**
+     * Modifica los datos de un usuario en el sistema por su ID.
+     * 
+     * @param id ID del usuario a modificar.
+     * @return Respuesta con código de estado HTTP correspondiente (200 (éxito) en caso de ser exitoso, 404 (no encontrado) si no).
+     */
+    @PutMapping("/{id}")
+    public ResponseEntity<DatosUsuario> actualizar(@PathVariable Integer id, @RequestBody DatosUsuario usuario) {
+        try {
+            DatosUsuario user = servicio.buscarPorId(id);
+            user.setNombre(user.getNombre());
+            user.setSnombre(user.getSnombre());
+            user.setApellidopat(user.getApellidopat());
+            user.setApellidomat(user.getApellidomat());
+            user.setContrasena(user.getContrasena());
+            user.setCorreo(user.getCorreo());
+            
+            servicio.guardarUsuario(user);
+            return ResponseEntity.ok(user);
         } catch (Exception e) {
             return ResponseEntity.notFound().build();
         }
