@@ -27,7 +27,7 @@ import java.util.List;
  * las operaciones CRUD sobre los usuarios.</p>
  */
 @RestController
-@RequestMapping("api/v1/usuarios")
+@RequestMapping("api/usuarios")
 @CrossOrigin(origins = "http://localhost:5173") // para permitir el front de Vite
 public class UsuariosController {
     @Autowired
