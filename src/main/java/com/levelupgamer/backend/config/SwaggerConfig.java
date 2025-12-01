@@ -13,9 +13,9 @@ public class SwaggerConfig {
     public OpenAPI customOpenAPI() {
         return new OpenAPI()
             .info(new Info()
-                .title("API Backend LevelUpGamer - Gestión de Contenido y Compras") 
+                .title("API Backend LevelUpGamer - Gestión de Contenido y Compras") // Mantener el título descriptivo
                 .version("1.0.0")
-                .description("Documentación de la API para la gestión de Artículos (Blog), Carrito de Compras, Órdenes y Mensajes de Contacto. Permite la administración completa del sitio web.")
+                .description("Documentación de la API para la gestión de Artículos (Blog), Carrito de Compras, Órdenes y Mensajes de Contacto. Permite la administración completa del sitio web.") // Mantener la descripción completa
             );
     }
 }
