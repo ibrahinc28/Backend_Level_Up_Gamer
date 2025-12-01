@@ -6,6 +6,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.levelupgamer.backend.model.MensajeContacto;
 import com.levelupgamer.backend.repository.MensajeContactoRepository;
@@ -16,6 +17,7 @@ public class MensajeContactoService {
     @Autowired
     private MensajeContactoRepository mensajeContactoRepository;
 
+    @Transactional
     public MensajeContacto guardarMensaje(MensajeContacto mensaje) {
         mensaje.setTimeStamp(LocalDateTime.now());
         mensaje.setStatus("Nuevo");
@@ -33,13 +35,15 @@ public class MensajeContactoService {
         return mensajeContactoRepository.findById(id);
     }
 
+    @Transactional
     public MensajeContacto actualizarEstado(Long id, String nuevoEstado){
-        return mensajeContactoRepository.findById(id).map(mensajeExitente ->{
-            mensajeExitente.setStatus(nuevoEstado);
-            return mensajeContactoRepository.save(mensajeExitente);
+        return mensajeContactoRepository.findById(id).map(mensajeExistente ->{
+            mensajeExistente.setStatus(nuevoEstado);
+            return mensajeContactoRepository.save(mensajeExistente);
         }).orElse(null);
     }
 
+    @Transactional
     public void eliminarMensaje(Long id){
         mensajeContactoRepository.deleteById(id);
     }
