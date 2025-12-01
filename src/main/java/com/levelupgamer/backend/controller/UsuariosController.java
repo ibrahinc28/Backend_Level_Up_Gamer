@@ -27,8 +27,8 @@ import java.util.List;
  * las operaciones CRUD sobre los usuarios.</p>
  */
 @RestController
-@RequestMapping("api/v1/usuarios")
-@CrossOrigin(origins = "http://localhost:5173") // para permitir el front de Vite
+@RequestMapping("api/usuarios")
+@CrossOrigin(origins = "http://frontend-levelupgamer.s3-website-us-east-1.amazonaws.com/") // para permitir el front de Vite
 public class UsuariosController {
     @Autowired
     private UsuariosService servicio;
@@ -98,9 +98,10 @@ public class UsuariosController {
      * @return Respuesta con código de estado HTTP correspondiente (200 (éxito) en caso de ser exitoso, 404 (no encontrado) si no).
      */
     @PutMapping("/{id}")
-    public ResponseEntity<DatosUsuario> actualizar(@PathVariable Integer id, @RequestBody DatosUsuario usuario) {
+    public ResponseEntity<DatosUsuario> actualizar(@PathVariable Long id, @RequestBody DatosUsuario usuario) {
         try {
             DatosUsuario user = servicio.buscarPorId(id);
+            user.setId(user.getId());
             user.setNombre(user.getNombre());
             user.setSnombre(user.getSnombre());
             user.setApellidopat(user.getApellidopat());
@@ -110,6 +111,7 @@ public class UsuariosController {
             
             servicio.guardarUsuario(user);
             return ResponseEntity.ok(user);
+
         } catch (Exception e) {
             return ResponseEntity.notFound().build();
         }
