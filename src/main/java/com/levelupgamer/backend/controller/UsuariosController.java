@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.CrossOrigin;
+// import org.springframework.web.bind.annotation.CrossOrigin;
 
 import com.levelupgamer.backend.service.UsuariosService;
 import com.levelupgamer.backend.model.DatosUsuario;
@@ -28,7 +28,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/api/usuarios")
-@CrossOrigin(origins = "http://frontend-levelupgamer.s3-website-us-east-1.amazonaws.com/") // para permitir el front de Vite
+// @CrossOrigin(origins = "http://frontend-levelupgamer.s3-website-us-east-1.amazonaws.com/") // para permitir el front de Vite
 public class UsuariosController {
     @Autowired
     private UsuariosService servicio;
